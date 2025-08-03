@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<body>
+  <div class="container-fluid d-flex flex-column justify-content-center align-items-center ">
+    <p class="text-center mt-5" data-aos="fade-right" data-aos-duration="1000">⚔️Green Light Red Light Game⚔️</p>
+    <div
+      class="change-color col-md-12 w-25 text-center p-1 d-flex flex-column justify-content-center align-items-center  "
+      id="change-color" data-aos="fade-left" data-aos-duration="1500"></div>
+    <div class="gg col-md-6 col-sm-10 mt-3 shadow " data-aos="fade-right" data-aos-duration="2000">
+      <div id="move"> 🕺</div>
+    </div>
+    <button id="start" class=" btn2 mt-4 p-1 shadow" data-aos="fade-up" data-aos-duration="2500"> start/Reset🎯</button>
+
+    <button class="btn1 mt-3 p-1" id="move1" data-aos="fade-down" data-aos-duration="1500">move➡️</button>
+
+    <h1 id="oo" class="mt-2"></h1>
+    <h1 id="o" class="mt-2"></h1>
+
+  </div>
+  <script>
+
+
+ const speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new speechRecognition();
+
+    let isgreen;
+    let intervalId;
+        let button = document.getElementById("start");
+      button.addEventListener("click", () => {
+      document.getElementById("oo").innerHTML = " ";
+      document.getElementById("o").innerHTML = " ";
+      document.getElementById("change-color").innerHTML = " ";
+      document.getElementById("change-color").style.backgroundColor = "white";
+      document.getElementById("change-color").style.boxShadow = "5px 5px 10px black";
+
+      score = 0;
+      intervalId = setInterval(() => {
+        isgreen = Math.random() > 0.5;
+
+        if (isgreen) {
+          isgreen = "green";
+          document.getElementById("change-color").innerHTML = "Green 🛡️";
+          document.getElementById("change-color").style.backgroundColor = "green";
+          const audio = new Audio("green.mp3"); // Replace with your sound file path
+          audio.play();
+          console.log(isgreen);
+        } else {
+          isgreen = "red";
+          document.getElementById("change-color").innerHTML = "red 🏹";
+          document.getElementById("change-color").style.backgroundColor = "red";
+          console.log(isgreen);
+          const audio = new Audio("red.mp3"); // Replace with your sound file path
+          audio.play();
+        }
+      }, 1000);
+    });
+
+
+    window.onload = () => {
+      recognition.start();
+    };
+
+    recognition.onresult = (event) => {
+      const command = event.results[0][0].transcript.toLowerCase().trim();
+      console.log("Heard:", command);
+
+      if (command === "press the button") {
+        button.click(); // Simulate button press
+      }
+    };
+
+    recognition.onend = () => {
+      recognition.start(); // Keep listening
+    };
+
+    let n = 0;
+    let score = 0;
+    function myFunction1() {
+      let p = "px";
+
+
+      if (isgreen == "green") {
+        n += 10;
+        score += 1;
+        document.getElementById("move").style.marginLeft = (n + p);
+        switch (score) {
+          case 1:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😶";
+            break;
+          case 2:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😑";
+            break;
+          case 3:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😐";
+            break;
+          case 4:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 🤨";
+            break;
+          case 5:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😒";
+            break;
+          case 6:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 🙂";
+            break;
+          case 7:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😃";
+            break;
+          case 8:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😁";
+            break;
+          case 9:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 🤩";
+            break;
+          case 10:
+            document.getElementById("o").innerHTML = "Your Score: " + score + " 😎";
+            break;
+        }
+
+        if (n === 100) {
+          document.getElementById("oo").innerHTML = "You Won 🥇🏆";
+          document.getElementById("move").style.marginLeft = "0px";
+          clearInterval(intervalId);
+        }
+
+
+      }
+      else if (isgreen == "red") {
+        document.getElementById("move").style.marginLeft = "0px";
+        alert(" You Loose ❌ ");
+        clearInterval(intervalId);
+      }
+    }
+
+    document.getElementById("move1").addEventListener("click", myFunction1);
+    document.getElementById("start").addEventListener("click", myFunction);
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>

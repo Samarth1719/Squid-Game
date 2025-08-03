@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  word-spacing: 0.25rem;
+
+
+}
+.container-fluid{
+background: linear-gradient(to right, rgb(0, 255, 55), rgb(185, 19, 19));
+    height: 100vh;
+}
+.change-color{
+ background-color: rgba(236, 243, 241, 0);
+    border-radius: 10px;
+    height: 40px;
+    
+}
+#move{
+    width: fit-content;
+}
+.gg{
+    background-color: aliceblue;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px;
+  
+}
+p{
+      letter-spacing: 5px;
+      font-size: x-large;
+}
+.btn1 , .btn2{
+          letter-spacing: 2px;
+
+border: 2px solid rgb(116, 115, 115);
+border-radius: 10px;
+}
+@media screen and (max-width: 575px) {
+
+    .gg{
+        width: 50vw
+    }
+}
